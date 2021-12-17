@@ -1,5 +1,12 @@
 import torch
 
+# There is one peculiar point about the dynamics used in this environment.
+# The agent doesn't bounce off the walls in a way you would expect a 
+# realistic elastic collision to occur. It instead undergoes some unusual
+# behavior (look at the clamping function in the step() routine below.
+# Although, this doesn't really matter for RL agents because it's just a
+# different dynamics, it might be helpful for the user to know this.
+
 class DotReacher():
     def __init__(self, target_state=torch.zeros(2), episode_cutoff_length=1000,
                  movement_noise_scaling=0):
@@ -27,12 +34,6 @@ class DotReacher():
     def step(self, action):
         noise = torch.rand(self.dim_states) * 0.06 - 0.03
 
-        # There is one peculiar point about the following dynamics:
-        # The agent doesn't bounce off the walls in a way you would expect a 
-        # realistic elastic collision to occur. It instead undergoes some
-        # unusual behavior (look at the clamping function in the following
-        # lines). This doesn't really matter for RL agents, because it's
-        # just a different dynamics; but is helpful for the user to know.
         self.state = torch.clamp(
             self.state + self.action_values[action] \
             + self.movement_noise_scaling * noise, self.LB, self.UB)
