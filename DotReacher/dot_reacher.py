@@ -34,9 +34,9 @@ class DotReacher():
     def step(self, action):
         noise = torch.rand(self.dim_states) * 0.06 - 0.03
 
-        self.state = torch.clamp(
-            self.state + self.action_values[action] \
-            + self.movement_noise_scaling * noise, self.LB, self.UB)
+        self.state = torch.clamp(self.state + self.action_values[action] \
+                                 + self.movement_noise_scaling * noise,
+                                 self.LB, self.UB)
         reward = - 0.01
         self.t += 1
         
