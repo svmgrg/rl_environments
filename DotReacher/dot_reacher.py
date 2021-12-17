@@ -29,8 +29,8 @@ class DotReacher():
         # The agent doesn't bounce off the walls in a way you would expect a 
         # realistic elastic collision to occur. It instead undergoes some
         # unusual behavior (look at the clamping function in the following
-        # lines). This doesn't really matters for RL agents, because it's
-        # just a different dynamics. But is helpful for the user to know.
+        # lines). This doesn't really matter for RL agents, because it's
+        # just a different dynamics; but is helpful for the user to know.
         self.state = torch.clamp(self.state + self.action_values[action] \
                                  + 0 * noise, self.LB, self.UB)
         reward = - 0.01
