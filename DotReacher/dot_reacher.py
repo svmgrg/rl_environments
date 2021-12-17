@@ -6,7 +6,7 @@ class DotReacher():
         self.dim_states = 2
         self.LB = torch.tensor([-1, -1], dtype=torch.float32)
         self.UB = torch.tensor([+1, +1], dtype=torch.float32)
-        self.action_values = 0.03 * torch.tensor([[-1, -1], [+0, +1], [+1, +1],
+        self.action_values = 0.03 * torch.tensor([[-1, +1], [+0, +1], [+1, +1],
                                                   [-1, +0], [+0, +0], [+1, +0],
                                                   [-1, -1], [+0, -1], [+1, -1]],
                                                  dtype=torch.float32)
