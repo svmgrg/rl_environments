@@ -22,7 +22,7 @@ class DotReacher():
         self.episode_cutoff_length = episode_cutoff_length
         self.movement_noise_scaling = movement_noise_scaling
         
-        self.state= None
+        self.state = None
         self.t = 0
 
     def reset(self):
