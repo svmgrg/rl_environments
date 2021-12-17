@@ -2,7 +2,7 @@ import torch
 
 class DotReacher():
     def __init__(self, target_state=torch.zeros(2), episode_cutoff_length=1000,
-                 noise_scaling=0):
+                 movement_noise_scaling=0):
         self.num_actions = 9
         self.dim_states = 2
         self.LB = torch.tensor([-1, -1], dtype=torch.float32)
@@ -13,7 +13,7 @@ class DotReacher():
                                                  dtype=torch.float32)
         self.target_state = target_state
         self.episode_cutoff_length = episode_cutoff_length
-        self.noise_scaling = noise_scaling
+        self.movement_noise_scaling = movement_noise_scaling
         
         self.state= None
         self.t = 0
@@ -35,7 +35,7 @@ class DotReacher():
         # just a different dynamics; but is helpful for the user to know.
         self.state = torch.clamp(
             self.state + self.action_values[action] \
-            + self.noise_scaling * noise, self.LB, self.UB)
+            + self.movement_noise_scaling * noise, self.LB, self.UB)
         reward = - 0.01
         self.t += 1
         
